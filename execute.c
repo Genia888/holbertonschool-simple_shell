@@ -1,36 +1,44 @@
 #include "shell.h"
 
 /**
- * execute_command - Fork and execute if command exists
- * @args: command + args
- * @prog: argv[0] (shell name)
+ * execute_command - Forks and executes a command
+ * @args: command and arguments
+ * @prog: program name
  */
 void execute_command(char **args, char *prog)
 {
-	char *cmd = args[0], *full_path = NULL;
-	pid_t child_pid;
+	char *cmd = args[0], *full_path;
 	struct stat st;
+	pid_t child_pid;
 
-	if (stat(cmd, &st) == 0)
+	if (strchr(cmd, '/'))
 		full_path = strdup(cmd);
 	else
 		full_path = get_path(cmd);
 
 	if (!full_path)
 	{
-		dprintf(STDERR_FILENO, "%s: 1: %s: not found\n", prog, cmd);
-		return;
+		write(STDERR_FILENO, prog, strlen(prog));
+		write(STDERR_FILENO, ": 1: ", 5);
+		write(STDERR_FILENO, cmd, strlen(cmd));
+		write(STDERR_FILENO, ": not found\n", 13);
+		_exit(127);
 	}
 
-	child_pid = fork();
-	if (child_pid == 0)
+	if (stat(full_path, &st) == 0)
 	{
-		execve(full_path, args, environ);
-		perror(prog);
-		exit(127);
+		child_pid = fork();
+		if (child_pid == 0)
+		{
+			execve(full_path, args, environ);
+			perror(prog);
+			free(full_path);
+			_exit(1);
+		}
+		else
+		{
+			wait(NULL);
+		}
 	}
-	else
-		wait(NULL);
-
 	free(full_path);
 }

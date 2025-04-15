@@ -1,44 +1,39 @@
 #include "shell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
-/**
- * main - Entry point of the shell
- * @ac: argument count
- * @av: argument vector
- * Return: 0 on success
- */
-int main(int ac, char **av)
+int main(int ac, char **av, char **environ)
 {
-	char *line = NULL, *clean_line = NULL;
-	size_t len = 0;
-	ssize_t read;
-	char **args;
-	(void)ac;
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
+    char *token;
+    char *argv[64];
+    int i, status = 0;
 
-	while (1)
-	{
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "($) ", 4);
+    (void)ac;
+    (void)av;
 
-		read = getline(&line, &len, stdin);
-		if (read == -1)
-		{
-			free(line);
-			break;
-		}
+    write(STDOUT_FILENO, "$ ", 2);
+    read = getline(&line, &len, stdin);
+    if (read == -1)
+    {
+        free(line);
+        return (0);
+    }
 
-		clean_line = trim_spaces(line);
-		args = parse_line(clean_line);
+    token = strtok(line, " \n");
+    i = 0;
+    while (token && i < 63)
+    {
+        argv[i++] = token;
+        token = strtok(NULL, " \n");
+    }
+    argv[i] = NULL;
 
-		if (!args || !args[0])
-		{
-			free_args(args);
-			_exit(127);
-		}
-
-		if (handle_builtin(args))
-			execute_command(args, av[0]);
-
-		free_args(args);
-	}
-	return (0);
+    status = execute_command(argv, environ);
+    free(line);
+    return (status);
 }

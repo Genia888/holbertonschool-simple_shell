@@ -1,44 +1,58 @@
 #include "shell.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-/**
- * execute_command - Forks and executes a command
- * @args: command and arguments
- * @prog: program name
- */
-void execute_command(char **args, char *prog)
+int execute_command(char **argv, char **environ)
 {
-	char *cmd = args[0], *full_path;
-	struct stat st;
-	pid_t child_pid;
+    pid_t pid;
+    int status;
+    char *full_path = NULL;
 
-	if (strchr(cmd, '/'))
-		full_path = strdup(cmd);
-	else
-		full_path = get_path(cmd);
+    if (!argv || !argv[0])
+        return (0);
 
-	if (!full_path)
-	{
-		write(STDERR_FILENO, prog, strlen(prog));
-		write(STDERR_FILENO, ": 1: ", 5);
-		write(STDERR_FILENO, cmd, strlen(cmd));
-		write(STDERR_FILENO, ": not found\n", 13);
-		_exit(127);
-	}
+    /* Chemin absolu ou relatif */
+    if (argv[0][0] == '/' || argv[0][0] == '.')
+    {
+        if (access(argv[0], X_OK) != 0)
+        {
+            fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+            return (127);
+        }
 
-	if (stat(full_path, &st) == 0)
-	{
-		child_pid = fork();
-		if (child_pid == 0)
-		{
-			execve(full_path, args, environ);
-			perror(prog);
-			free(full_path);
-			_exit(1);
-		}
-		else
-		{
-			wait(NULL);
-		}
-	}
-	free(full_path);
+        pid = fork();
+        if (pid == 0)
+        {
+            execve(argv[0], argv, environ);
+            perror("execve");
+            exit(1);
+        }
+        wait(&status);
+        return (WEXITSTATUS(status));
+    }
+
+    /* Sinon on cherche via PATH */
+    full_path = _which(argv[0], environ);
+    if (!full_path || access(full_path, X_OK) != 0)
+    {
+        fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+        if (full_path)
+            free(full_path);
+        return (127);
+    }
+
+    pid = fork();
+    if (pid == 0)
+    {
+        execve(full_path, argv, environ);
+        perror("execve");
+        free(full_path);
+        exit(1);
+    }
+    free(full_path);
+    wait(&status);
+    return (WEXITSTATUS(status));
 }

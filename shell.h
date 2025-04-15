@@ -16,7 +16,8 @@ char *trim_spaces(char *str);
 char **parse_line(char *line);
 void free_args(char **args);
 char *get_path(char *cmd);
-void execute_command(char **args, char *prog);
+int execute_command(char **argv, char **environ);
 int handle_builtin(char **args);
 
 #endif
+char *_which(char *cmd, char **environ);

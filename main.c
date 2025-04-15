@@ -8,7 +8,7 @@
  */
 int main(int ac, char **av)
 {
-	char *line = NULL;
+	char *line = NULL, *clean_line = NULL;
 	size_t len = 0;
 	ssize_t read;
 	char **args;
@@ -21,24 +21,24 @@ int main(int ac, char **av)
 
 		read = getline(&line, &len, stdin);
 		if (read == -1)
+		{
+			free(line);
 			break;
+		}
 
-		args = parse_line(line);
+		clean_line = trim_spaces(line);
+		args = parse_line(clean_line);
+
 		if (!args || !args[0])
 		{
 			free_args(args);
 			continue;
 		}
 
-		if (handle_builtin(args) == 0)
-		{
-			free_args(args);
-			continue;
-		}
+		if (handle_builtin(args))
+			execute_command(args, av[0]);
 
-		execute_command(args, av[0]);
 		free_args(args);
 	}
-	free(line);
 	return (0);
 }

@@ -11,6 +11,8 @@
 
 extern char **environ;
 
+char *_getenv(const char *name);
+char *trim_spaces(char *str);
 char **parse_line(char *line);
 void free_args(char **args);
 char *get_path(char *cmd);

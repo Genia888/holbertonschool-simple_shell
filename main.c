@@ -32,7 +32,7 @@ int main(int ac, char **av)
 		if (!args || !args[0])
 		{
 			free_args(args);
-			continue;
+			_exit(127);
 		}
 
 		if (handle_builtin(args))

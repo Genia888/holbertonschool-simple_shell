@@ -1,35 +1,53 @@
 #include "shell.h"
 
 /**
+ * _getenv - Gets value of an env variable
+ * @name: env var name
+ * Return: pointer to value or NULL
+ */
+char *_getenv(const char *name)
+{
+	int i;
+	size_t len = strlen(name);
+
+	for (i = 0; environ[i]; i++)
+	{
+		if (strncmp(environ[i], name, len) == 0 && environ[i][len] == '=')
+			return (environ[i] + len + 1);
+	}
+	return (NULL);
+}
+
+/**
  * get_path - Searches for command in PATH
  * @cmd: command
  * Return: full path or NULL
  */
 char *get_path(char *cmd)
 {
-	char *path = getenv("PATH"), *dir, *full;
+	char *path, *token, *full;
 	struct stat st;
 
+	path = _getenv("PATH");
 	if (!path)
 		return (NULL);
 
 	path = strdup(path);
-	dir = strtok(path, ":");
-
-	while (dir)
+	token = strtok(path, ":");
+	while (token)
 	{
-		full = malloc(strlen(dir) + strlen(cmd) + 2);
+		full = malloc(strlen(token) + strlen(cmd) + 2);
 		if (!full)
 			break;
 
-		sprintf(full, "%s/%s", dir, cmd);
+		sprintf(full, "%s/%s", token, cmd);
 		if (stat(full, &st) == 0)
 		{
 			free(path);
 			return (full);
 		}
 		free(full);
-		dir = strtok(NULL, ":");
+		token = strtok(NULL, ":");
 	}
 	free(path);
 	return (NULL);

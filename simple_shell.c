@@ -20,7 +20,6 @@ int main(void)
 	size_t characters;
 	pid_t child_pid;
 	int status;
-	int i = 0;
 	char *argv[2];
 
 	printf("$");

@@ -1,0 +1,25 @@
+total 828
+-rw-r--r-- 1 root root    226 Apr 15 14:39 AUTHORS
+-rw-r--r-- 1 root root    344 Apr 15 18:35 README.md
+-rw-r--r-- 1 root root    358 Apr 15 14:39 builtins.c
+-rwxr-xr-x 1 root root   1639 Apr 15 18:35 check_final_task4.sh
+-rwxr-xr-x 1 root root    824 Apr 15 18:35 check_task4_local.sh
+-rw-r--r-- 1 root root 446464 Apr 15 18:35 core.134
+-rw-r--r-- 1 root root 446464 Apr 15 18:35 core.136
+-rw-r--r-- 1 root root 446464 Apr 15 18:35 core.138
+-rw-r--r-- 1 root root   1267 Apr 15 18:35 execute.c
+-rw-r--r-- 1 root root      0 Apr 16 01:20 expected.txt
+-rw-r--r-- 1 root root    218 Apr 15 14:39 free_args.c
+-rw-r--r-- 1 root root    911 Apr 15 18:35 get_path.c
+-rwxr-xr-x 1 root root 138216 Apr 15 18:35 hbtn_ls
+-rwxr-xr-x 1 root root  17496 Apr 16 01:08 hsh
+-rw-r--r-- 1 root root    874 Apr 16 01:07 main.c
+-rw-r--r-- 1 root root    408 Apr 15 14:39 parse_line.c
+-rw-r--r-- 1 root root   1241 Apr 16 01:20 result.txt
+-rw-r--r-- 1 root root    486 Apr 15 18:35 shell.h
+-rw-r--r-- 1 root root    817 Apr 15 18:45 simple_shell.d
+-rw-r--r-- 1 root root      6 Apr 15 14:39 tempo.txt
+drwxr-xr-x 2 root root   4096 Apr 15 18:19 test
+-rwxr-xr-x 1 root root    416 Apr 15 14:39 test_task_4.sh
+-rw-r--r-- 1 root root    420 Apr 15 18:35 trim.c
+-rw-r--r-- 1 root root    956 Apr 15 18:35 which.c

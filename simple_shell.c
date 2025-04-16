@@ -27,6 +27,12 @@ int main(void)
 		}
 		args[i] = NULL;
 
+		if (args[0] && strcmp(args[0], "exit") == 0)
+		{
+			free(line);
+			exit(0);
+		}
+
 		/* execute the commande */
 		if (args[0])
 			simple_execute_command(args);

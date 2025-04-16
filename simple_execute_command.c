@@ -29,7 +29,7 @@ void simple_execute_command(char **args)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(full_cmd, args, NULL);
+		execve(full_cmd, args, environ);
 		perror("execve");
 		exit(1);
 	}

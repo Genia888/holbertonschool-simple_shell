@@ -30,7 +30,7 @@ int main(void)
 		if (args[0] && strcmp(args[0], "exit") == 0)
 		{
 			free(line);
-			exit(0);
+			exit(2);
 		}
 
 		/* execute the commande */

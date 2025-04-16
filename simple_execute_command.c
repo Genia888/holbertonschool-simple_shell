@@ -19,7 +19,6 @@ void simple_execute_command(char **args)
 		exit(0);
 
 	full_cmd = strdup(args[0]);
-
 	if (!full_cmd)
 	{
 		dprintf(STDERR_FILENO, "./hsh: 1: %s: not found\n", args[0]);
@@ -29,7 +28,7 @@ void simple_execute_command(char **args)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(full_cmd, args, NULL);
+		execve(full_cmd, args, environ);
 		perror("execve");
 		exit(1);
 	}

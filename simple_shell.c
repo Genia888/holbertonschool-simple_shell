@@ -32,7 +32,10 @@ int main(void)
 		if (args[0] && strcmp(args[0], "exit") == 0)
 		{
 			free(line);
-			exit(2);
+			if (interactive_mode) 
+				exit(2);
+			else
+				exit(0);
 		}
 
 		/* execute the commande */

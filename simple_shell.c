@@ -35,7 +35,7 @@ int main(void)
 			if (interactive_mode)
 				exit(2);
 			else
-				exit(0);
+				exit(2);
 		}
 
 		/* execute the commande */

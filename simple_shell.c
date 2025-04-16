@@ -12,7 +12,7 @@ int main(void)
 	int interactive_mode = isatty(STDIN_FILENO) && isatty(STDERR_FILENO);
 	char *line = NULL, *token = NULL, *args[10];
 	size_t len = 0;
-	int i;
+	int i, status = 0;
 
 	/* get a line in the standard input */
 	if (interactive_mode)
@@ -33,9 +33,7 @@ int main(void)
 		{
 			free(line);
 			if (interactive_mode) 
-				exit(2);
-			else
-				exit(0);
+				exit(status);
 		}
 
 		/* execute the commande */
@@ -47,5 +45,5 @@ int main(void)
 
 	/* free memory of line */
 	free(line);
-	return (0);
+	return (status);
 }

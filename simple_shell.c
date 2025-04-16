@@ -2,19 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <unistd.h>
 /**
  * main - Shell minimal
  * Return: Always 0
  */
 int main(void)
 {
+	int interactive_mode = isatty(STDIN_FILENO) && isatty(STDERR_FILENO);
 	char *line = NULL, *token = NULL, *args[10];
 	size_t len = 0;
 	int i;
 
-	printf("$");
 	/* get a line in the standard input */
+	if (interactive_mode)
+		printf("($) ");
 	while (getline(&line, &len, stdin) != -1)
 	{
 		/* take care of number of parameters of the command line */
@@ -30,7 +32,8 @@ int main(void)
 		/* execute the commande */
 		if (args[0])
 			simple_execute_command(args);
-		printf("$");
+		if (interactive_mode)
+			printf("($) ");
 	}
 
 	/* free memory of line */

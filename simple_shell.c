@@ -3,16 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
 /**
  * main - Shell minimal
  * Return: Always 0
  */
+
 int main(void)
 {
 	int interactive_mode = isatty(STDIN_FILENO) && isatty(STDERR_FILENO);
 	char *line = NULL, *token = NULL, *args[10];
 	size_t len = 0;
-	int i;
+	int i, status = 0;
 
 	/* if it's an interactive mode display the prompt */
 	if (interactive_mode)
@@ -35,10 +37,7 @@ int main(void)
 		if (args[0] && strcmp(args[0], "exit") == 0)
 		{
 			free(line);
-			if (interactive_mode)
-				exit(2);
-			else
-				exit(2);
+			exit(status);
 		}
 
 		/* execute the commande */

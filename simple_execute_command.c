@@ -11,17 +11,19 @@
  */
 void simple_execute_command(char **args)
 {
-	char *full_cmd = NULL, *search_cmd = NULL;
+	char *full_cmd = NULL;
 	pid_t pid;
 	int status;
 	/* if args == NULL or args[0] == NULL => exit(0) */
 	if (!args || !args[0])
 		exit(0);
-	/* duplicate the args[0] */
-	search_cmd = strdup(args[0]);
-	full_cmd = search_path(search_cmd);
+	/* duplicate the args[0] or search path */
+	if (strchr(args[0], '/'))
+		full_cmd = strdup(args[0]);
+	else
+		full_cmd = search_path(args[0]);
 	/* if we cannot allocate memory display an error message */
-	if (!full_cmd || !search_cmd)
+	if (!full_cmd)
 	{
 		dprintf(STDERR_FILENO, "./hsh: 1: %s: not found\n", args[0]);
 		exit(127);
@@ -44,6 +46,5 @@ void simple_execute_command(char **args)
 		waitpid(pid, &status, 0);
 		/* free the strdup allocation */
 		free(full_cmd);
-		free(search_cmd);
 	}
 }

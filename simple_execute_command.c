@@ -14,20 +14,33 @@ void simple_execute_command(char **args)
 	char *full_cmd = NULL;
 	pid_t pid;
 	int status;
+	int exist_cmd = 0;
 	/* if args == NULL or args[0] == NULL => exit(0) */
 	if (!args || !args[0])
 		exit(0);
 	/* duplicate the args[0] or search path */
 	if (strchr(args[0], '/'))
+	{
 		full_cmd = strdup(args[0]);
+		exist_cmd = exist_command(full_cmd);
+	}
 	else
+	{
 		full_cmd = search_path(args[0]);
+		exist_cmd = exist_command(full_cmd);
+	}
 	/* if we cannot allocate memory display an error message */
 	if (!full_cmd)
 	{
 		dprintf(STDERR_FILENO, "./hsh: 1: %s: not found\n", args[0]);
 		exit(127);
 	}
+	/* if we cannot allocate memory display an error message */
+        if (!exist_cmd)
+        {
+                dprintf(STDERR_FILENO, "./hsh: 1: %s: not found\n", args[0]);
+                exit(127);
+        }
 	/* fork the process */
 	pid = fork();
 	if (pid == 0)

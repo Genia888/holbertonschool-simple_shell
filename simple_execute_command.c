@@ -32,15 +32,15 @@ int simple_execute_command(char **args)
 	/* if we cannot allocate memory display an error message */
 	if (!full_cmd)
 	{
-		dprintf(STDERR_FILENO, "./hsh: 1: %s: not found\n", args[0]);
+		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
 		return (127);
 	}
 	/* if we cannot allocate memory display an error message */
-        if (!exist_cmd)
-        {
-                dprintf(STDERR_FILENO, "./hsh: 1: %s: not found\n", args[0]);
-                exit(127);
-        }
+	if (!exist_cmd)
+	{
+		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+		exit(127);
+	}
 	/* fork the process */
 	pid = fork();
 	if (pid == -1)

@@ -13,13 +13,13 @@
  */
 int exist_command(char *cmd)
 {
-        struct stat st;
-        if (stat(cmd, &st) == 0 && access(cmd, X_OK) == 0)
-        {
-                return (1);
+	struct stat st;
 
-        }
-        return 0;
+	if (stat(cmd, &st) == 0 && access(cmd, X_OK) == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 /**
@@ -42,18 +42,12 @@ char *search_path(char *cmd)
 			break;
 		}
 	}
-
-	/* if don't find the path return NULL */
 	if (!path)
 		return (NULL);
-
-	/* duplicate the path */
 	path_copy = strdup(path);
 	if (!path_copy)
 		return (NULL);
-
-	/* split the path by : */
-	token = strtok(path_copy, ":");
+	token = strtok(path_copy, ":"); /* split the path by : */
 	while (token)
 	{
 		/* allocate the memory for the path directory */
@@ -63,22 +57,16 @@ char *search_path(char *cmd)
 			free(path_copy);
 			return (NULL);
 		}
-
-		/* create the full path */
 		sprintf(full_path, "%s/%s", token, cmd);
 		/* check if the file exist and if we can exec it */
 		if (stat(full_path, &st) == 0 && access(full_path, X_OK) == 0)
 		{
 			free(path_copy);
 			return (full_path);
-		}
-		/* free the full path */
+		} /* free the full path */
 		free(full_path);
-		/* check the next path separate by the : */ 
 		token = strtok(NULL, ":");
-	}
-	/* if the the full path have not been found free it */ 
+	} /* if the the full path have not been found free it */
 	free(path_copy);
-	/* return NULL */
 	return (NULL);
 }

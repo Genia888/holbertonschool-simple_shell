@@ -17,7 +17,7 @@ int simple_execute_command(char **args)
 	int exist_cmd = 0;
 	/* if args == NULL or args[0] == NULL => exit(0) */
 	if (!args || !args[0])
-		exit(0);
+		return (0);
 	/* duplicate the args[0] or search path */
 	if (strchr(args[0], '/'))
 	{
@@ -39,7 +39,7 @@ int simple_execute_command(char **args)
 	if (!exist_cmd)
 	{
 		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
-		exit(127);
+		return (127);
 	}
 	/* fork the process */
 	pid = fork();
@@ -56,7 +56,7 @@ int simple_execute_command(char **args)
 		/* Si execve échoue, afficher une erreur et quitter */
 		perror("execve");
 		free(full_cmd);
-		exit(2);
+		return (2);
 	}
 
 	/* Parent : attendre la fin du processus enfant */

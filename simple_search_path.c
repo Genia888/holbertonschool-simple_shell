@@ -6,6 +6,23 @@
 #include <sys/stat.h>
 
 /**
+ * exist_command - test if the command exists
+ * @cmd : name of the exec
+ *
+ * Return: if the command exists
+ */
+int exist_command(char *cmd)
+{
+        struct stat st;
+        if (stat(cmd, &st) == 0 && access(cmd, X_OK) == 0)
+        {
+                return (1);
+
+        }
+        return 0;
+}
+
+/**
  * search_path - Recherche une commande dans le PATH
  * @cmd: commande (ex: "ls")
  * Return: chemin complet (à free) ou NULL si non trouvée

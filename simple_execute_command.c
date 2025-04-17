@@ -19,6 +19,7 @@ void simple_execute_command(char **args)
 		exit(0);
 	/* duplicate the args[0] */
 	full_cmd = strdup(args[0]);
+	full_cmd = search_path(full_cmd);
 	/* if we cannot allocate memory display an error message */
 	if (!full_cmd)
 	{

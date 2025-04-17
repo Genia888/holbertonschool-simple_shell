@@ -42,7 +42,7 @@ int main(void)
 
 		/* execute the commande */
 		if (args[0])
-			simple_execute_command(args);
+			status = simple_execute_command(args);
 		/* if it's an interactive mode display the prompt */
 		if (interactive_mode)
 			printf("($) ");

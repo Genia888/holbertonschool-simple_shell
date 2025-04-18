@@ -65,7 +65,6 @@ int simple_execute_command(char **args)
 	}
 	else
 	{
-		fprintf(stderr, "./hsh: 1: %s: not foundU\n", args[0]);
 		return (127);
 	}
 }

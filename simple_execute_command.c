@@ -23,10 +23,11 @@ int simple_execute_command(char **args)
 	else
 		full_cmd = search_path(args[0]);
 	exist_cmd = exist_command(full_cmd);
-	/* if we cannot allocate memory display an error message */
-	if (!full_cmd || !exist_cmd)
+	/* check if command dont be found or command not exist and not executable */
+	if (full_cmd == NULL || exist_cmd == 0)
 	{
 		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+		free(full_cmd);
 		return (127);
 	}
 	pid = fork(); /* fork the process */

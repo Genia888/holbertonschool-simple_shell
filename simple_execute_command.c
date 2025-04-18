@@ -51,12 +51,10 @@ int simple_execute_command(char **args)
 		free(full_cmd); /* Retourner le code de sortie du processus enfant */
 		if (WIFEXITED(status))
 		{
-			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
 			return (WEXITSTATUS(status));
 		}
 		else
 		{
-			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
 			return (2);
 
 		}

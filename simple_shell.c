@@ -14,17 +14,12 @@ int main(void)
 	size_t len = 0;
 	int i, status = 0;
 
-	/* if it's an interactive mode display the prompt */
-	if (interactive_mode)
-		printf("($) ");
-	/* get a line in the standard input */
-	/* while a line is enter do the loop */
-	while (getline(&line, &len, stdin) != -1)
+	if (interactive_mode) 		/* if it's an interactive mode display the prompt */
+		printf("($) ");		/* get a line in the standard input */
+	while (getline(&line, &len, stdin) != -1) 	/* while a line is enter do the loop */
 	{
-		/* take care of number of parameters of the command line */
 		i = 0;
-		/* the strtok move the line in an array of "word" */
-		token = strtok(line, " \t\n");
+		token = strtok(line, " \t\n"); 		/* the strtok move the line in an array of "word" */
 		while (token && i < 9)
 		{
 			args[i++] = token;
@@ -41,15 +36,11 @@ int main(void)
 			print_env();
 			status = 0;
 		}
-		/* execute the commande */
-		else if (args[0])
+		else if (args[0]) 	/* execute the commande */
 			status = simple_execute_command(args);
-		/* if it's an interactive mode display the prompt */
-		if (interactive_mode)
+		if (interactive_mode) 		/* if it's an interactive mode display the prompt */
 			printf("($) ");
 	}
-	/* free memory of line */
-	free(line);
-	/* return code to the system */
-	return (status);
+	free(line);	/* free memory of line */
+	return (status);	/* return code to the system */
 }

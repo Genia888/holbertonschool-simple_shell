@@ -14,7 +14,7 @@ int simple_execute_command(char **args)
 {
 	char *full_cmd = NULL;
 	pid_t pid;
-	int status, exist_cmd = 0;
+	int status, exist_cmd = 0, do_fork = 1;
 
 	if (!args || !args[0]) /* if args == NULL or args[0] == NULL => exit(0) */
 		return (0);
@@ -28,26 +28,44 @@ int simple_execute_command(char **args)
 	{
 		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
 		free(full_cmd);
+		do_fork = 0;
+	}
+	if (do_fork == 1)
+	{
+		pid = fork(); /* fork the process */
+		if (pid == -1)
+		{
+			perror("fork");
+			free(full_cmd);
+			return (2);
+		}
+		if (pid == 0) /* Processus enfant */
+		{
+			execve(full_cmd, args, environ);
+			perror("execve");
+			free(full_cmd);
+			return (2);
+		} /* Parent : attendre la fin du processus enfant */
+		waitpid(pid, &status, 0);
+
+		free(full_cmd); /* Retourner le code de sortie du processus enfant */
+		if (WIFEXITED(status))
+		{
+			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+			printf("plop %d\n", status);
+			return (WEXITSTATUS(status));
+		}
+		else
+		{
+			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
+			printf("plop2 %d\n", status);
+			return (2);
+
+		}
+	}
+	else
+	{
+		fprintf(stderr, "./hsh: 1: %s: not foundU\n", args[0]);
 		return (127);
 	}
-	pid = fork(); /* fork the process */
-	if (pid == -1)
-	{
-		perror("fork");
-		free(full_cmd);
-		return (2);
-	}
-	if (pid == 0) /* Processus enfant */
-	{
-		execve(full_cmd, args, environ);
-		perror("execve");
-		free(full_cmd);
-		return (2);
-	} /* Parent : attendre la fin du processus enfant */
-	waitpid(pid, &status, 0);
-	free(full_cmd); /* Retourner le code de sortie du processus enfant */
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	else
-		return (2);
 }

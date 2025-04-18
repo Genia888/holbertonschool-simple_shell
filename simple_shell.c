@@ -36,8 +36,13 @@ int main(void)
 			free(line);
 			exit(status);
 		}
+		else if (args[0] && strcmp(args[0], "env") == 0)
+		{
+			print_env();
+			status = 0;
+		}
 		/* execute the commande */
-		if (args[0])
+		else if (args[0])
 			status = simple_execute_command(args);
 		/* if it's an interactive mode display the prompt */
 		if (interactive_mode)

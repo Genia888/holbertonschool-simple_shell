@@ -27,6 +27,7 @@ int exist_command(char *cmd)
  * @cmd: commande (ex: "ls")
  * Return: chemin complet (à free) ou NULL si non trouvée
  */
+
 char *search_path(char *cmd)
 {
 	char *path = NULL, *path_copy, *token, *full_path;

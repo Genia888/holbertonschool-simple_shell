@@ -46,7 +46,15 @@ int simple_execute_command(char **args)
 			perror("execve");
 			free(full_cmd);
 			return (2);
-		} /* Parent : attendre la fin du processus enfant */
+		} 
+		if (pid == 0)
+		{
+			execve(full_cmd, args, environ);
+			perror("execve");
+			free(full_cmd);
+			exit(2);
+		}
+		/* Parent : attendre la fin du processus enfant */
 		waitpid(pid, &status, 0);
 
 		free(full_cmd); /* Retourner le code de sortie du processus enfant */

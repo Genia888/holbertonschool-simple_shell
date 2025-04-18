@@ -19,12 +19,11 @@ int simple_execute_command(char **args)
 	if (!args || !args[0]) /* if args == NULL or args[0] == NULL => exit(0) */
 		return (0);
 	if (strchr(args[0], '/'))
-	{
 		full_cmd = strdup(args[0]);
-		exist_cmd = exist_command(full_cmd);
-	}
 	else
 		full_cmd = search_path(args[0]);
+	if (full_cmd != NULL)
+		exist_cmd = exist_command(full_cmd);
 	/* check if command dont be found or command not exist and not executable */
 	if (full_cmd == NULL || exist_cmd == 0)
 	{

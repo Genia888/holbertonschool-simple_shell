@@ -52,13 +52,11 @@ int simple_execute_command(char **args)
 		if (WIFEXITED(status))
 		{
 			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
-			printf("plop %d\n", status);
 			return (WEXITSTATUS(status));
 		}
 		else
 		{
 			fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
-			printf("plop2 %d\n", status);
 			return (2);
 
 		}

@@ -61,6 +61,6 @@ int simple_execute_command(char **args)
 	}
 	else
 	{
-		return (128);
+		return (127);
 	}
 }

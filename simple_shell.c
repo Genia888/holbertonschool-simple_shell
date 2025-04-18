@@ -46,5 +46,5 @@ int main(void)
 	/* free memory of line */
 	free(line);
 	/* return code to the system */
-	return (0);
+	return (status);
 }

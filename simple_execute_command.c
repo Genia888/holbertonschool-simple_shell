@@ -48,7 +48,7 @@ int simple_execute_command(char **args)
 	if (pid == -1)
 	{
 		perror("fork");
-		free_str(full_cmd);
+		free_str(flag, full_cmd);
 		return (2);
 	}
 	if (pid == 0) /* Processus enfant */
@@ -59,7 +59,7 @@ int simple_execute_command(char **args)
 		return (2);
 	} /* Parent : attendre la fin du processus enfant */
 	waitpid(pid, &status, 0);
-	free_str(full_cmd); /* Retourner le code de sortie du processus enfant */
+	free_str(flag, full_cmd); /* Retourner le code de sortie du processus enfant */
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else

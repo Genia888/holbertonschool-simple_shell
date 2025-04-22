@@ -47,14 +47,9 @@ int simple_execute_command(char **args)
 			free(full_cmd);
 			return (2);
 		}
-		/* Parent : wait for child */
-		waitpid(pid, &status, 0);
+		waitpid(pid, &status, 0); /* Parent : wait for child */
 		free(full_cmd); /* free pointer */
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-		else
-			return (2);
+		return ((WIFEXITED(status)) ? (WEXITSTATUS(status)) : (2));
 	}
-	else
-		return (127);
+	return (127);
 }

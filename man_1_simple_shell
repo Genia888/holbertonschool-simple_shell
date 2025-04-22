@@ -1,0 +1,114 @@
+.TH SIMPLE_SHELL 1 "April 2024" "Simple Shell 1.0v" "Genia888 Manual"
+
+.SH NAME
+simple_shell \- a minimalistic UNIX command interpreter
+
+.SH SYNOPSIS
+.B simple_shell
+.RI [interactive_mode]
+.br
+.B simple_shell
+.RI [non-interactive_mode]
+
+.SH DESCRIPTION
+.B simple_shell
+is a lightweight UNIX shell implementation supporting basic command execution, built-ins, and environment handling. It is designed for educational purposes and conforms to the Holberton School project requirements.
+
+Key features:
+- Basic command execution with arguments
+- PATH resolution
+- Built-ins: 
+.B exit
+and 
+.B env
+- Handles EOF (Ctrl+D) and signals
+- No memory leaks (checked with Valgrind)
+
+.SH OPTIONS
+.TP
+.B Interactive Mode
+Displays a prompt (e.g., 
+.B #cisfun$ 
+or 
+.B :) 
+) and waits for user input.
+.TP
+.B Non-Interactive Mode
+Reads commands from a file or pipe (e.g., 
+.B echo "ls" | ./simple_shell
+).
+
+.SH BUILT-IN COMMANDS
+.TP
+.B exit
+Exits the shell with status 0.
+.TP
+.B env
+Prints the current environment variables.
+.TP
+.B help
+Displays this help message (if implemented).
+
+.SH ENVIRONMENT
+.B simple_shell
+inherits the parent process environment and supports:
+.TP
+.B PATH
+For locating executables (e.g., 
+.B /bin/ls
+).
+
+.SH EXIT STATUS
+Returns:
+- 0 on successful execution
+- 1 on command not found
+- 2 on invalid arguments (if extended)
+
+.SH ERROR MESSAGES
+Prints errors to stderr in the format:
+.B ./simple_shell: 1: ls: not found
+
+.SH IMPLEMENTATION DETAILS
+- Uses 
+.B execve
+for command execution
+- Forks child processes via 
+.B fork
+- Handles processes with 
+.B wait
+- Complies with Betty style (80 chars/line, 40-line functions)
+
+.SH INSTALLING
+To install and run Simple Shell, follow these steps:
+.br
+1. Clone the repository using the following command:
+.br
+\(dqgit clone \fIhttps://github.com/SebSa12000/holbertonschool-simple_shell.git\fR\(dq
+.br
+2. Compile the program by running the following command:
+.br
+\(dqgcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh\(dq
+.br
+3. Run the program with the command in \fBSYNOPSIS\fP.
+
+.SH COMMANDS
+.TP
+.B pwd 
+Print the path of the current working directory.
+.B exit
+Exits the shell with status 0.
+.TP
+.B env
+Prints the current environment variables.
+.TP
+.B ls
+List the contents of the current directory.
+
+.SH AUTHOR
+Written by Mr Philips, Sebastien Salgues, Genia888 for Holberton School Project.
+
+.SH COPYRIGHT
+This is free software.
+
+.SH SEE ALSO
+.BR bash

@@ -17,8 +17,7 @@ int main(void)
 	/* if it's an interactive mode display the prompt */
 	if (interactive_mode)
 		printf("($) ");
-	/* get a line in the standard input */
-	/* while a line is enter do the loop */
+	/* get a line in the standard input while a line is enter do the loop */
 	while (getline(&line, &len, stdin) != -1)
 	{
 		/* take care of number of parameters of the command line */
@@ -48,8 +47,6 @@ int main(void)
 		if (interactive_mode)
 			printf("($) ");
 	}
-	/* free memory of line */
-	free(line);
-	/* return code to the system */
-	return (status);
+	free(line); /* free memory */
+	return (status); /* return code to the system */
 }

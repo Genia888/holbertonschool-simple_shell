@@ -15,7 +15,8 @@ int main(void)
 	int i, status = 0;
 
 	if (interactive_mode)/* if it's an interactive mode display the prompt */
-		printf("($) ");/* get a line in the standard input */
+		printf("($) ");
+	/* get a line in the standard input while a line is enter do the loop */
 	while (getline(&line, &len, stdin) != -1)
 		/* while a line is enter do the loop */
 	{

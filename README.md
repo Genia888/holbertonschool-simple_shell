@@ -103,6 +103,7 @@ evgen@Zenbook:~/holbertonschool-simple_shell$ ./hsh
 ```bash
 man ./man_1_simple_shell
 ```
+:arrow_double_down:
 ```man
 SIMPLE_SHELL(1)                                         Genia888 Manual                                        SIMPLE_SHELL(1)
 

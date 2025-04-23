@@ -96,7 +96,10 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c -o hsh
 
 
 ## Authors
-- [Mr Phillips](https://github.com/ddoudou7)
+- [Mr Phillips](https://github.com/ddoudou7)     
 - [Sebastien Salgues](https://github.com/SebSa12000)
 - [Evgeni Khalepo](https://github.com/Genia888)
-  
+<p align="center">
+  <strong>Students of !</strong><br>
+  <img src="https://i.postimg.cc/vTm5RRPM/1-540-logo-1.png" alt="Logo" width="150"><br>
+</p>

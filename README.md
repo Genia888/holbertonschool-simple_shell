@@ -1,4 +1,5 @@
-# 0x16. C - Simple Shell
+# Simple Shell Team Project Holberton School C#25
+[![Blue-Futuristic-Technology-Linked-In-Background-Photo3.gif](https://i.postimg.cc/KYMRdqvX/Blue-Futuristic-Technology-Linked-In-Background-Photo3.gif)](https://postimg.cc/p9PWjBFk)
 
 This project is a simple UNIX command line interpreter written in C.
 
@@ -11,7 +12,7 @@ This project is a simple UNIX command line interpreter written in C.
 - No use of getenv, system or printf
 - Forks only when needed
 
-## Team
-- Mr Philips (ddoudou7)
-- @SebSa12000
-- Evgeni
+## Authors👷‍♂
+- [Mr Phillips](https://github.com/ddoudou7)
+- [Sebastien Salgues](https://github.com/SebSa12000)
+- [Evgeni Khalepo](https://github.com/Genia888)

@@ -31,9 +31,7 @@ Managing end-of-file (EOF) conditions
 - ``access``, ``chdir``, ``close``, ``execve``, ``exit``, ``_exit``, ``fflush``, ``fork``, ``free``, ``getcwd``, ``getline``, ``getpid``, ``isatty``, ``kill``, ``malloc``, ``open``, ``opendir``, ``perror``, ``printf``, ``fprintf``, ``read``, ``readdir``, ``signal``, ``stat``, ``strtok``, ``wait``, ``write``.
 
 ## :chart_with_downwards_trend: Flowchart
-*******
-*******
-*******
+Soon................
 ## :writing_hand: Project Structure
 | FILE  |DESCRIPTION|
 | :--------------------: | :--------------------------: |
@@ -53,8 +51,17 @@ Managing end-of-file (EOF) conditions
 - All files end with a new line
 - Use system calls only when needed
 
+ ## :gear: Compilation
+- Compile the shell using this command:
+```bash
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c -o hsh
+```
+```bash
+./hsh
+```
+
 ## :closed_book: Usage
-### Interactive Mode: :arrow_heading_down:
+- ### Interactive Mode: :arrow_heading_down:
 ```bash
 ./hsh
 ($) ls
@@ -64,28 +71,110 @@ README.md  man_1_simple_shell  simple_print_env.c        simple_shell.c        t
 /home/seb/dev/holbertonschool-simple_shell
 ($) exit
 ```
-- ### Non-Interactive Mode: :arrow_heading_down:
+- ### Not-Interactive Mode: :arrow_heading_down:
 ```bash
 echo "ls" | ./hsh
 AUTHORS    hsh                 simple_execute_command.c  simple_search_path.c  simple_shell.h
 README.md  man_1_simple_shell  simple_print_env.c        simple_shell.c        toto.txt
 ```
-
-## :gear: Compilation
-- Compile the shell using this command:
+## :broom: Memory Management
+- This shell was tested with ``valgrind`` to ensure proper memory allocation and deallocation. No memory leaks were found during normal usage.
 ```bash
-gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c -o hsh
-```
-```bash
-./hsh
+evgen@Zenbook:~/holbertonschool-simple_shell$ ./hsh
+($) valgrind ./hsh
+==534== Memcheck, a memory error detector
+==534== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==534== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==534== Command: ./hsh
+==534==
+($) exit
+==534==
+==534== HEAP SUMMARY:
+==534==     in use at exit: 0 bytes in 0 blocks
+==534==   total heap usage: 3 allocs, 3 frees, 2,168 bytes allocated
+==534==
+==534== All heap blocks were freed -- no leaks are possible
+==534==
+==534== For lists of detected and suppressed errors, rerun with: -s
+==534== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 ```
 ## :ledger: Manual
 - Run the man page for this shell : 
 ```bash
 man ./man_1_simple_shell
 ```
-  [![Capture-d-cran-man-simple-shell.jpg](https://i.postimg.cc/wvCzg1nq/Capture-d-cran-man-simple-shell.jpg)](https://postimg.cc/XGkmgYVm)
-  
+```man
+SIMPLE_SHELL(1)                                         Genia888 Manual                                        SIMPLE_SHELL(1)
+
+NAME
+       simple_shell - a minimalistic UNIX command interpreter
+
+SYNOPSIS
+       simple_shell [interactive_mode]
+       simple_shell [non-interactive_mode]
+
+DESCRIPTION
+       simple_shell  is a lightweight UNIX shell implementation supporting basic command execution, built-ins, and environment
+       handling. It is designed for educational purposes and conforms to the Holberton School project requirements.
+
+       Key features: - Basic command execution with arguments - PATH resolution -  Built-ins:  exit  and  env  -  Handles  EOF
+       (Ctrl+D) and signals - No memory leaks (checked with Valgrind)
+
+OPTIONS
+       Interactive Mode
+              Displays a prompt (e.g., #cisfun$ or :) ) and waits for user input.
+
+       Non-Interactive Mode
+              Reads commands from a file or pipe (e.g., echo ls | ./simple_shell ).
+
+BUILT-IN COMMANDS
+       exit   Exits the shell with status 0.
+
+       env    Prints the current environment variables.
+
+       help   Displays this help message (if implemented).
+ENVIRONMENT
+       simple_shell inherits the parent process environment and supports:
+
+       PATH   For locating executables (e.g., /bin/ls ).
+
+EXIT STATUS
+       Returns: - 0 on successful execution - 1 on command not found - 2 on invalid arguments (if extended)
+
+ERROR MESSAGES
+       Prints errors to stderr in the format: ./simple_shell: 1: ls: not found
+
+IMPLEMENTATION DETAILS
+       -  Uses  execve  for  command  execution - Forks child processes via fork - Handles processes with wait - Complies with
+       Betty style (80 chars/line, 40-line functions)
+
+INSTALLING
+       To install and run Simple Shell, follow these steps:
+       1. Clone the repository using the following command:
+       "git clone https://github.com/SebSa12000/holbertonschool-simple_shell.git"
+       2. Compile the program by running the following command:
+       "gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh"
+       3. Run the program with the command in SYNOPSIS.
+
+COMMANDS
+       pwd    Print the path of the current working directory.  exit Exits the shell with status 0.
+
+       env    Prints the current environment variables.
+
+       ls     List the contents of the current directory.
+
+AUTHOR
+       Written by Mr Philips, Sebastien Salgues, Genia888 for Holberton School Project.
+
+COPYRIGHT
+       This is free software.
+
+SEE ALSO
+       bash
+
+Simple Shell 1.0v                                         April 2024                                           SIMPLE_SHELL(1)
+ Manual page man_1_simple_shell line 31/70 (END) (press h for help or q to quit)
+```  
 ## :man_technologist: Authors
 - [Mr Phillips](https://github.com/ddoudou7)     
 - [Sebastien Salgues](https://github.com/SebSa12000)

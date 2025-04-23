@@ -172,7 +172,7 @@ COPYRIGHT
 SEE ALSO
        bash
 
-Simple Shell 1.0v                                         April 2024                                           SIMPLE_SHELL(1)
+Simple Shell 1.0v                                         April 2025                                           SIMPLE_SHELL(1)
  Manual page man_1_simple_shell line 31/70 (END) (press h for help or q to quit)
 ```  
 ## :man_technologist: Authors

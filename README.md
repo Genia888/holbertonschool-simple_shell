@@ -54,7 +54,7 @@ Managing end-of-file (EOF) conditions
 - Use system calls only when needed
 
 ## :closed_book: Usage
-### Interactive Mode:
+### Interactive Mode: :arrow_heading_down:
 ```bash
 ./hsh
 ($) ls
@@ -64,7 +64,7 @@ README.md  man_1_simple_shell  simple_print_env.c        simple_shell.c        t
 /home/seb/dev/holbertonschool-simple_shell
 ($) exit
 ```
-- ### Non-Interactive Mode:
+- ### Non-Interactive Mode: :arrow_heading_down:
 ```bash
 echo "ls" | ./hsh
 AUTHORS    hsh                 simple_execute_command.c  simple_search_path.c  simple_shell.h

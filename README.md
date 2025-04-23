@@ -3,6 +3,25 @@
 ## Description
 This project is a simple UNIX command interpreter shell implementation in C. The shell is designed to mimic basic functionalities of the standard shell ``/bin/sh``, including command execution, handling arguments, and managing the environment.
 
+## Learning Objectives
+
+By completing this project, you will understand:
+# General Concepts
+The history of UNIX and its creators
+How a shell works internally
+Process management in UNIX systems
+The difference between functions and system calls
+Environment manipulation
+Program execution mechanisms
+
+# Technical Skills
+Creating and managing processes
+Using system calls like ``execve``, ``fork``, ``wait``
+Handling process IDs (PID and PPID)
+Working with the PATH environment variable
+Implementing basic shell features
+Managing end-of-file (EOF) conditions
+
 ## Allowed Functions and System Calls
 - All standard functions from ``string.h``
 - ``access``, ``chdir``, ``close``, ``execve``, ``exit``, ``_exit``, ``fflush``, ``fork``, ``free``, ``getcwd``, ``getline``, ``getpid``, ``isatty``, ``kill``, ``malloc``, ``open``, ``opendir``, ``perror``, ``printf``, ``fprintf``, ``read``, ``readdir``, ``signal``, ``stat``, ``strtok``, ``wait``, ``write``.
@@ -14,27 +33,52 @@ This project is a simple UNIX command interpreter shell implementation in C. The
 - You are not allowed to use global variables
 - No more than 5 functions per file.
 - The prototypes of all your functions should be included in your header file called ``main.h``
-- 
+ 
 ## Manual
 Run the man page for this shell : 
-``man ./man_1_simple_shell``
-
+```bash
+man ./man_1_simple_shell
+```
   [![Capture-d-cran-man-simple-shell.jpg](https://i.postimg.cc/wvCzg1nq/Capture-d-cran-man-simple-shell.jpg)](https://postimg.cc/XGkmgYVm)
 
-## Features
-- First check if the command is interactive or not 
-- => not interactive is 'echo "ls" | ./hsh' 
-- => interactive is launch by './hsh' in terminal and display a prompt '($)' and wait for command
-- Executes commands using full path or from $PATH
-- Displays error message and return code 127 when command not found
-- No use of getenv, system or printf
-- Forks only when needed
-  
-## Compilation
+## Code Style and Constraints
+- Betty-compliant code
+- No memory leaks
+- Max 5 functions per file
+- All files end with a new line
+- Use system calls only when needed
 
+## Features
+- Interactive prompt display (``$``)
+- Executes commands with absolute paths (e.g., ``/bin/ls``)
+- Handles ``Ctrl+D`` (EOF)
+- Supports both interactive and non-interactive modes
+- Built-in command: ``exit``
+  
+## Usage
+Interactive Mode:
+```bash
+./hsh
+($) ls
+AUTHORS    hsh                 simple_execute_command.c  simple_search_path.c  simple_shell.h
+README.md  man_1_simple_shell  simple_print_env.c        simple_shell.c        toto.txt
+($) pwd
+/home/seb/dev/holbertonschool-simple_shell
+($) exit
+```
+Non-Interactive Mode:
+```bash
+echo "ls" | ./hsh
+AUTHORS    hsh                 simple_execute_command.c  simple_search_path.c  simple_shell.h
+README.md  man_1_simple_shell  simple_print_env.c        simple_shell.c        toto.txt
+```
+
+## Compilation
 Compile the shell using this command:
 ```bash
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c -o hsh
+```
+```bash
 ./hsh
 ```
   
@@ -51,7 +95,8 @@ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c -o hsh
 |``simple_shell.h``|header file containing function prototypes and includes|
 
 
-## Authors👷‍♂
+## Authors
 - [Mr Phillips](https://github.com/ddoudou7)
 - [Sebastien Salgues](https://github.com/SebSa12000)
 - [Evgeni Khalepo](https://github.com/Genia888)
+  

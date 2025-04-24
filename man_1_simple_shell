@@ -61,7 +61,7 @@ For locating executables (e.g.,
 .SH EXIT STATUS
 Returns:
 - 0 on successful execution
-- 1 on command not found
+- 127 on command not found
 - 2 on invalid arguments (if extended)
 
 .SH ERROR MESSAGES

@@ -1,4 +1,4 @@
-# Simple Shell Team Project Holberton School :school:  C#25 
+# Simple Shell Team Project Holberton School :school:  C#26 
 [![Blue-Futuristic-Technology-Linked-In-Background-Photo3.gif](https://i.postimg.cc/KYMRdqvX/Blue-Futuristic-Technology-Linked-In-Background-Photo3.gif)](https://postimg.cc/p9PWjBFk)
 ## :receipt: Description
 This project is a simple UNIX command interpreter shell implementation in C. The shell is designed to mimic basic functionalities of the standard shell ``/bin/sh``, including command execution, handling arguments, and managing the environment.

@@ -31,7 +31,7 @@ Managing end-of-file (EOF) conditions
 - ``access``, ``chdir``, ``close``, ``execve``, ``exit``, ``_exit``, ``fflush``, ``fork``, ``free``, ``getcwd``, ``getline``, ``getpid``, ``isatty``, ``kill``, ``malloc``, ``open``, ``opendir``, ``perror``, ``printf``, ``fprintf``, ``read``, ``readdir``, ``signal``, ``stat``, ``strtok``, ``wait``, ``write``.
 
 ## :chart_with_downwards_trend: Flowchart
-Soon................
+[![flowchart-drawio-2.png](https://i.postimg.cc/tCCsNyds/flowchart-drawio-2.png)](https://postimg.cc/nMgVnyPx)
 ## :writing_hand: Project Structure
 | FILE  |DESCRIPTION|
 | :--------------------: | :--------------------------: |
